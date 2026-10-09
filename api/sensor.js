@@ -1,24 +1,15 @@
-
-export default function handler(req, res) {
-  if (req.method !== "GET") {
-    return res.status(405).json({
-      status: "error",
-      message: "Method tidak diizinkan"
-    });
+export default async function handler(req, res) {
+  if (req.method === "POST") {
+    // Proses data sensor dari ESP32
   }
 
-  return res.status(200).json({
-    status: "success",
-    source: "simulation",
-    simulated: true,
-    message: "Data sensor simulasi Lamban AI",
-    temperature: 28,
-    humidity: 70,
-    distance: 25,
-    unit: {
-      temperature: "°C",
-      humidity: "%",
-      distance: "cm"
-    }
+  if (req.method === "GET") {
+    // Ambil data sensor yang tersimpan
+  }
+
+  res.setHeader("Allow", "GET, POST");
+  return res.status(405).json({
+    status: "error",
+    message: "Method tidak diizinkan"
   });
 }
